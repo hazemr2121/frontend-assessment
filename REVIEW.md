@@ -19,3 +19,13 @@
 **Why it matters:** The application uses the App Router, so an outdated framework can expose deployed instances to known framework-level vulnerabilities even if the application code is otherwise correct.
 
 **Improvement made:** Next.js has been upgraded to `14.2.35`, the patched release in the existing 14.x line.
+
+## 3. Activity Feed: missing request and empty-state feedback
+
+**Category:** UX, React best practices
+
+**What was wrong:** The Activity Feed treated failed requests as an empty array and rendered the list before the request had completed. It did not check non-success HTTP responses, offer a retry action, or explain when a search returned no matches.
+
+**Why it matters:** Users could not distinguish a loading or failed request from genuinely empty activity. This makes transient network failures look like data loss and leaves users without a way to recover.
+
+**Improvement made:** The page now checks HTTP responses, exposes explicit loading and error states, provides a retry action, and distinguishes between an empty feed and an empty search result.
