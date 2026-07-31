@@ -4,6 +4,8 @@ import { useTasks } from "@/hooks/useTasks";
 import type { Task } from "@/types/api";
 import { StatusFilter } from "@/components/tasks/StatusFilter";
 import { TaskList } from "@/components/tasks/TaskList";
+import { LoadingCard } from "../shared/LoadingCard";
+import { ErrorCard } from "../shared/ErrorCard";
 
 export function TaskDashboard() {
   const {
@@ -29,23 +31,16 @@ export function TaskDashboard() {
 
       <StatusFilter value={filter} onChange={setFilter} />
 
-      {loading ? (
-        <section className="card" style={{ padding: "1rem" }}>
-          <p style={{ margin: 0 }}>Loading tasks...</p>
-        </section>
-      ) : null}
+      {loading ? <LoadingCard label="Loading tasks..." /> : null}
 
-      {error ? (
-        <section className="card" style={{ padding: "1rem", borderColor: "#e3b4c0", background: "#fff8fa" }}>
-          <p style={{ marginTop: 0, marginBottom: "0.75rem", color: "var(--danger)" }}>{error}</p>
-          <button type="button" className="button" onClick={fetchTasks}>
-            Retry
-          </button>
-        </section>
-      ) : null}
+      {error ? <ErrorCard message={error} onRetry={fetchTasks} /> : null}
 
       {!loading && !error ? (
-        <TaskList tasks={filteredTasks} updatingTaskId={updatingTaskId} onToggle={handleToggle} />
+        <TaskList
+          tasks={filteredTasks}
+          updatingTaskId={updatingTaskId}
+          onToggle={handleToggle}
+        />
       ) : null}
     </section>
   );
