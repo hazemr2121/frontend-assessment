@@ -1,4 +1,6 @@
+// components/tasks/TaskItem.tsx
 import type { Task } from "@/types/api";
+import { StatusBadge } from "@/components/tasks/StatusBadge";
 
 type TaskItemProps = {
   task: Task;
@@ -16,9 +18,16 @@ export function TaskItem({ task, busy, onToggle }: TaskItemProps) {
         gap: "0.4rem",
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-between", gap: "0.8rem", alignItems: "start" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "0.8rem",
+          alignItems: "start",
+        }}
+      >
         <p style={{ margin: 0, fontWeight: 600 }}>{task.title}</p>
-        <span className="badge">{task.completed ? "Completed" : "Pending"}</span>
+        <StatusBadge completed={task.completed} />
       </div>
 
       <small style={{ color: "var(--muted)" }}>
@@ -33,7 +42,11 @@ export function TaskItem({ task, busy, onToggle }: TaskItemProps) {
           disabled={busy}
           aria-label={`Mark ${task.title} as ${task.completed ? "pending" : "completed"}`}
         >
-          {busy ? "Saving..." : task.completed ? "Mark as Pending" : "Mark as Completed"}
+          {busy
+            ? "Saving..."
+            : task.completed
+              ? "Mark as Pending"
+              : "Mark as Completed"}
         </button>
       </div>
     </li>

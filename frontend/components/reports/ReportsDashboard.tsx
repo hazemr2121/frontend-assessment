@@ -22,8 +22,7 @@ export function ReportsDashboard() {
   }
 
   const statusCards = [
-    { label: "To do", value: summary.byStatus.todo },
-    { label: "In progress", value: summary.byStatus["in-progress"] },
+    { label: "Pending", value: summary.byStatus.todo },
     { label: "Done", value: summary.byStatus.done },
   ];
 

@@ -17,7 +17,7 @@ export function ActivityDashboard() {
   return (
     <section className="stack">
       <section className="card" style={{ padding: "1rem" }}>
-        <h1 style={{ marginTop: 0, marginBottom: "0.5rem" }}>Activity Feed</h1>
+        <h1 style={{ marginTop: 0, marginBottom: "1rem" }}>Activity Feed</h1>
         <input
           className="input"
           placeholder="Search activity"
