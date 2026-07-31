@@ -1,14 +1,10 @@
-import Link from "next/link";
 import { ReportsDashboard } from "@/components/reports/ReportsDashboard";
+import { BackButton } from "@/components/shared/BackButton";
 
 export default function ReportsPage() {
   return (
     <main className="stack">
-      <nav>
-        <Link href="/" className="button">
-          Back
-        </Link>
-      </nav>
+      <BackButton />
 
       <header className="card" style={{ padding: "1rem" }}>
         <h1 style={{ margin: 0 }}>Reports</h1>

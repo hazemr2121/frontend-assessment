@@ -29,3 +29,13 @@
 **Why it matters:** Users could not distinguish a loading or failed request from genuinely empty activity. This makes transient network failures look like data loss and leaves users without a way to recover.
 
 **Improvement made:** The page now checks HTTP responses, exposes explicit loading and error states, provides a retry action, and distinguishes between an empty feed and an empty search result.
+
+## 4. duplicate code across the app
+
+**Category:** Code Quality, Maintainability, React Best Practices
+
+**What was wrong:** So much code is duplicate.
+
+**Why it matters:** Any styling change has to be made in all places instead of one and duplicated markup increases file size and cognitive load, making the component harder to scan and review.
+
+**Improvement made:** Extracted the repeated markup into a single shared component.

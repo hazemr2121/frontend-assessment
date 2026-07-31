@@ -1,4 +1,22 @@
-import Link from "next/link";
+import { DashboardCard } from "@/components/shared/DashboardCard";
+
+const cards = [
+  {
+    href: "/tasks",
+    title: "Task Dashboard",
+    description: "View and manage your tasks.",
+  },
+  {
+    href: "/activity",
+    title: "Activity Feed",
+    description: "Search and filter recent activity.",
+  },
+  {
+    href: "/reports",
+    title: "Reports",
+    description: "Review your performance and progress.",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -14,38 +32,13 @@ export default function HomePage() {
         className="stack"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}
       >
-        <Link
-          href="/tasks"
-          className="card"
-          style={{ padding: "1rem", display: "block" }}
-        >
-          <h2 style={{ marginTop: 0 }}>Task Dashboard</h2>
-          <p style={{ margin: 0, color: "var(--muted)" }}>
-            View and manage your tasks.
-          </p>
-        </Link>
-
-        <Link
-          href="/activity"
-          className="card"
-          style={{ padding: "1rem", display: "block" }}
-        >
-          <h2 style={{ marginTop: 0 }}>Activity Feed</h2>
-          <p style={{ margin: 0, color: "var(--muted)" }}>
-            Search and filter recent activity.
-          </p>
-        </Link>
-
-        <Link
-          href="/reports"
-          className="card"
-          style={{ padding: "1rem", display: "block" }}
-        >
-          <h2 style={{ marginTop: 0 }}>Reports</h2>
-          <p style={{ margin: 0, color: "var(--muted)" }}>
-            Review your performance and progress.
-          </p>
-        </Link>
+        {cards.map((card) => (
+          <DashboardCard
+            href={card.href}
+            title={card.title}
+            description={card.description}
+          />
+        ))}
       </section>
     </main>
   );
