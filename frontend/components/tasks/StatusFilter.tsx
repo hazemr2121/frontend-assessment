@@ -13,16 +13,22 @@ type StatusFilterProps = {
 
 export function StatusFilter({ value, onChange }: StatusFilterProps) {
   return (
-    <section aria-label="Filter tasks by status" className="card" style={{ padding: "0.8rem" }}>
+    <section aria-label="Filter tasks by status" className="card">
       <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
         {FILTERS.map((filter) => {
           const active = filter.value === value;
+          const variantClass =
+            filter.value === "completed"
+              ? "filter-chip completed"
+              : filter.value === "pending"
+                ? "filter-chip pending"
+                : "filter-chip";
 
           return (
             <button
               key={filter.value}
               type="button"
-              className={active ? "button primary" : "button"}
+              className={`button ${variantClass} ${active ? "active" : ""}`.trim()}
               onClick={() => onChange(filter.value)}
               aria-pressed={active}
             >

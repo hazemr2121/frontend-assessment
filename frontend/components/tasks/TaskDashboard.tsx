@@ -25,7 +25,7 @@ export function TaskDashboard() {
 
   return (
     <section className="stack">
-      <header className="card" style={{ padding: "1rem" }}>
+      <header className="card">
         <h1 style={{ marginTop: 0, marginBottom: "0.5rem" }}>Task Dashboard</h1>
       </header>
 

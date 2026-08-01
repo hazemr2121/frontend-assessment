@@ -4,38 +4,48 @@
 
 **Category:** Performance, maintainability, React best practices
 
-**What was wrong:** The Activity Feed kept three versions of the activity list (`allActivity`, `shownActivity`, and `forcedList`), updated them through several effects, and ran a timer every 1.4 seconds. It also applied the same search filter twice and formatted every timestamp twice.
+**What was wrong:** The Activity Feed originally kept multiple versions of the same list in state, updated them through several effects, and ran a timer every 1.4 seconds. It also applied the same search logic more than once and formatted timestamps repeatedly.
 
-**Why it matters:** The timer triggered continuous renders without a user-facing purpose, while storing derived lists as state created multiple sources of truth. This made the component harder to follow and added needless work for every search and timer update.
+**Why it matters:** This added unnecessary renders and created multiple sources of truth, which made the component harder to reason about and maintain.
 
-**Improvement made:** The page now stores only the fetched activity and search query. The visible list and summary counts are derived with `useMemo`; a single named filter and time-format helper replace the duplicated functions. The unused timer and state-synchronization effects have been removed.
+**Improvement made:** The current implementation keeps only the fetched activity and the search query, derives the visible list and summary values with `useMemo`, and removes the timer-based updates.
 
 ## 2. Next.js version below the security patch level
 
 **Category:** Security
 
-**What was wrong:** The frontend depended on `next@14.2.5`. This release is affected by App Router security advisories and its own package metadata warns that it contains a security vulnerability.
+**What was wrong:** The frontend depended on an older Next.js release that was below the patched version for known App Router security issues.
 
-**Why it matters:** The application uses the App Router, so an outdated framework can expose deployed instances to known framework-level vulnerabilities even if the application code is otherwise correct.
+**Why it matters:** Using an outdated framework can expose deployments to known vulnerabilities even when the application code itself is otherwise correct.
 
-**Improvement made:** Next.js has been upgraded to `14.2.35`, the patched release in the existing 14.x line.
+**Improvement made:** Next.js was upgraded to `14.2.35`.
 
 ## 3. Activity Feed: missing request and empty-state feedback
 
 **Category:** UX, React best practices
 
-**What was wrong:** The Activity Feed treated failed requests as an empty array and rendered the list before the request had completed. It did not check non-success HTTP responses, offer a retry action, or explain when a search returned no matches.
+**What was wrong:** The original experience treated failed requests like empty data and rendered the list before the request finished. It also did not clearly explain when a search returned no results.
 
-**Why it matters:** Users could not distinguish a loading or failed request from genuinely empty activity. This makes transient network failures look like data loss and leaves users without a way to recover.
+**Why it matters:** Users could not distinguish loading, failure, and genuinely empty states, which made the experience feel unreliable.
 
-**Improvement made:** The page now checks HTTP responses, exposes explicit loading and error states, provides a retry action, and distinguishes between an empty feed and an empty search result.
+**Improvement made:** The current UI now exposes explicit loading and error states, supports retry, and clearly distinguishes between an empty feed and an empty search result.
 
-## 4. duplicate code across the app
+## 4. Repeated layout and styling patterns across the app
 
-**Category:** Code Quality, Maintainability, React Best Practices
+**Category:** Code quality, maintainability, React best practices
 
-**What was wrong:** So much code is duplicate.
+**What was wrong:** Several parts of the interface reused similar layout and styling patterns in a way that made the code feel repetitive.
 
-**Why it matters:** Any styling change has to be made in all places instead of one and duplicated markup increases file size and cognitive load, making the component harder to scan and review.
+**Why it matters:** Repeated structure increases file size and makes future changes slower and more error-prone.
 
-**Improvement made:** Extracted the repeated markup into a single shared component.
+**Improvement made:** Shared UI components were introduced to keep the experience more consistent and reduce duplicated markup.
+
+## 5. Accessibility and clarity opportunities
+
+**Category:** UX, accessibility, maintainability
+
+**What was wrong:** Some controls still rely on minimal visual affordances rather than a fully accessible and explicit experience.
+
+**Why it matters:** Clear labels and stronger visual state cues help users understand the interface more quickly, especially when interacting with filters and actions.
+
+**Improvement made:** The task-filter controls now use clearer visual states, and the UI is more consistent in how it communicates completed versus pending items.

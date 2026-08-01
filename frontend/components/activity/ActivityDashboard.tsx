@@ -16,7 +16,7 @@ export function ActivityDashboard() {
 
   return (
     <section className="stack">
-      <section className="card" style={{ padding: "1rem" }}>
+      <section className="card">
         <h1 style={{ marginTop: 0, marginBottom: "1rem" }}>Activity Feed</h1>
         <input
           className="input"
@@ -26,7 +26,7 @@ export function ActivityDashboard() {
         />
       </section>
 
-      <section className="card" style={{ padding: "1rem" }}>
+      <section className="card">
         <small style={{ color: "var(--muted)" }}>
           Total: {stats.total} | Visible: {stats.visible}
         </small>
@@ -36,7 +36,7 @@ export function ActivityDashboard() {
       {error ? <ErrorCard message={error} onRetry={fetchActivity} /> : null}
 
       {!loading && !error ? (
-        <section className="card" style={{ padding: "1rem" }}>
+        <section className="card">
           <ActivityList
             items={filteredActivity}
             emptyMessage={

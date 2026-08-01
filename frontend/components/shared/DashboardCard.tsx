@@ -11,11 +11,7 @@ export function DashboardCard({
   description,
 }: DashboardCardProps) {
   return (
-    <Link
-      href={href}
-      className="card"
-      style={{ padding: "1rem", display: "block" }}
-    >
+    <Link href={href} className="card" style={{ display: "block" }}>
       <h2 style={{ marginTop: 0 }}>{title}</h2>
       <p style={{ margin: 0, color: "var(--muted)" }}>{description}</p>
     </Link>

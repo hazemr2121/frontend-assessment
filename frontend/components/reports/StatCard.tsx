@@ -8,7 +8,7 @@ export function StatCard({
   size?: "sm" | "md";
 }) {
   return (
-    <section className="card" style={{ padding: "1rem" }}>
+    <section className="card">
       <p style={{ margin: 0, color: "var(--muted)" }}>{label}</p>
       <p
         style={{

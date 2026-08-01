@@ -6,7 +6,7 @@ export default function ReportsPage() {
     <main className="stack">
       <BackButton />
 
-      <header className="card" style={{ padding: "1rem" }}>
+      <header className="card">
         <h1 style={{ margin: 0 }}>Reports</h1>
         <p style={{ marginBottom: 0, color: "var(--muted)" }}>
           A snapshot of task progress and recent activity.
